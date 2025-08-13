@@ -2,9 +2,14 @@ import { View, Text,StyleSheet } from "react-native";
 import { GlobalStyles } from "../../constants/styles";
 
 
-function ExpenseSummary({ periodName, expenses }) {
+// function ExpenseSummary({ periodName, expenses }) {
+//   const expenseSum = expenses.reduce((sum, expense) => {
+//     return sum + expense.amount;
+//   }, 0);
+
+  function ExpenseSummary({ periodName, expenses = [] }) {
   const expenseSum = expenses.reduce((sum, expense) => {
-    return sum + expense.amount;
+    return sum + (expense.amount || 0);
   }, 0);
 
   return (
