@@ -4,7 +4,7 @@ import IconButton from "../components/UI/IconButton";
 import { GlobalStyles } from "../constants/styles";
 import { ExpensesContext } from "../store/expenses-context";
 import ExpenseForm from "../components/ManageExpense/ExpenseForm";
-import { storeExpense } from "../components/ExpensesOutput/util/http";
+import { storeExpense, updateExpense, deleteExpense } from "../components/ExpensesOutput/util/http";
 
 
 
@@ -21,28 +21,36 @@ function ManageExpense({route,navigation}){
         navigation.setOptions({
         title: isEditing ? 'Edit Expense' : 'Add Expense'
     });
-    })
+    }, [navigation, isEditing])
+
 
    
-    function deleteExpenseHandler(){
+
+   
+    async function deleteExpenseHandler(){
+
+         // delete expense ref
+          await deleteExpense(editedExpenseId);
+
           expensesCtx.deleteExpense(editedExpenseId);
           navigation.goBack();
+         
     }
     
     function cancelHandler(){
         navigation.goBack();
 
     }
-    function confirmHandler(expenseData){
+    async function confirmHandler(expenseData){
         if (isEditing){
             expensesCtx.updateExpense( editedExpenseId, expenseData)
+            
+            //for my reference http update expense
+            await updateExpense(editedExpenseId,expenseData);
                
         }else{
-
-            //myown reference for http requests
-            storeExpense(expenseData);
-
-            expensesCtx.addExpense(expenseData)
+            const id=await storeExpense(expenseData)
+            expensesCtx.addExpense({...expenseData,id:id});
        }
           navigation.goBack();
 
