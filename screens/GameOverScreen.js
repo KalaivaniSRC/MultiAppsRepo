@@ -23,6 +23,42 @@ function GameOverScreen({ roundsNumber, userNumber, onStartNewGame }) {
     </View>
   );
 }
+{/* Modal Dropdown
+          <Modal
+            transparent={true}
+            visible={isDropdownVisible}
+            animationType="fade"
+          >
+            <TouchableOpacity
+              style={styles.modalOverlay}
+              activeOpacity={1}
+              onPress={() => setDropdownVisible(false)}
+            >
+              <View style={styles.modalContainer}>
+                <ScrollView>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setYearFilter(null);
+                      setDropdownVisible(false);
+                    }}
+                  >
+                    <Text style={styles.modalItem}>All</Text>
+                  </TouchableOpacity>
+                  {yearOptions.map((year) => (
+                    <TouchableOpacity
+                      key={year}
+                      onPress={() => {
+                        setYearFilter(year);
+                        setDropdownVisible(false);
+                      }}
+                    >
+                      <Text style={styles.modalItem}>{year}</Text>
+                    </TouchableOpacity>
+                  ))}
+                </ScrollView>
+              </View>
+            </TouchableOpacity>
+          </Modal> */}
 
 export default GameOverScreen;
 
